@@ -1,0 +1,8 @@
+[project]
+name = "thinkfast"
+version = "0.1.0"
+description = "Starter kit for the Think Fast track: local decision models for data work."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = []
