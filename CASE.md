@@ -1,6 +1,7 @@
 <!--
-Case brief in the proximata Hackathon '26 Case Book format, ready to paste into the Case Book.
-Text in [brackets] is still open and needs input from the proximata team.
+proximata Hackathon '26 Case Book entry. Replaces the proximata "[Case title]" template section.
+"Tracks at a glance" row: | AI systems and agentic infrastructure | Think Fast: Local Decision Models | proximata | Brief in, brackets marked |
+Text in [brackets] is still open.
 -->
 
 PROXIMATA HACKATHON '26 · AI SYSTEMS AND AGENTIC INFRASTRUCTURE
@@ -54,9 +55,9 @@ Each level is a demo on its own; go as far as you can.
 ## Data & Resources
 
 - **Starter repo:** the decision API contract; a dev suite of five data-work task families (column typing, product matching, value checks, row problems, ticket triage) with a generator for unlimited training data; an evaluation runner (accuracy, Brier score, calibration error, automation rate at a 5% error budget, latency); a messy product catalogue with an answer key; and a baseline bridge that turns any local model server with token log-probabilities into a decision engine.
-- **Open models and code:** [Kev](https://github.com/jaredpalmer/kev) (Apache-2.0; decision models from 0.8B to 27B parameters, serving this API), [SemIf](https://github.com/TheoLeeCJ/SemIf-OpenJev) (MIT; reads option probabilities from open models, including llama.cpp on CPU and MLX on Mac) and [LocalJev](https://github.com/githubnext/localjev) (MIT; a bridge to local model servers). Any open-weight model is allowed.
+- **Open models and code:** Kev (github.com/jaredpalmer/kev, Apache-2.0; decision models from 0.8B to 27B parameters, serving this API), SemIf (github.com/TheoLeeCJ/SemIf-OpenJev, MIT; reads option probabilities from open models, including llama.cpp on CPU and MLX on Mac) and LocalJev (github.com/githubnext/localjev, MIT; a bridge to local model servers). Any open-weight model is allowed.
 - **Hidden suite:** the same five families with fresh data, plus task families you haven't seen. It runs on the reference machine after code freeze.
-- [Proposed, confirm with mesh applied: a shared GPU server on the venue network running [Goethe](https://github.com/meshapplied/goethe), their open-source inference server, with large open models as teachers for labelling and distillation during the build. Not reachable at grading time.]
+- [Proposed, confirm with mesh applied: a shared GPU server on the venue network running Goethe (github.com/meshapplied/goethe), their open-source inference server, with large open models as teachers for labelling and distillation during the build. Not reachable at grading time.]
 - [Reference machine for grading: TBC, announced at kick-off]
 - [GPU credits for fine-tuning: sponsor TBC]
 - Adaption Labs' workshop on training a model from your own data. The "Best use of Adaption" prize is open to this track.
