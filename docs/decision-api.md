@@ -4,9 +4,11 @@ Your engine must serve this one endpoint. The evaluation runner
 (`thinkfast/run_eval.py`) calls nothing else.
 
 The wire format is the one the open decision-model projects already speak.
-[Kev](https://github.com/jaredpalmer/kev) documents it in full in its README,
-so a Kev server passes this contract unchanged. This track and its starter kit
-are not affiliated with TypeSafe or any other vendor.
+[Kev](https://github.com/jaredpalmer/kev) documents it in full in its README and
+serves this exact endpoint; it echoes the request's `model` field and ignores
+fields it doesn't recognise, so the evaluation runner works against it unchanged
+(pass `--model kev-latest` if you like). This track and its starter kit are not
+affiliated with TypeSafe or any other vendor.
 
 ## `POST /v1/systemone`
 

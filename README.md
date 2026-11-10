@@ -38,7 +38,7 @@ uv run --extra serve python -m kev.serve --run jaredpalmer/kev-0.8b --port 8009
 uv run python -m thinkfast.bridge --upstream http://127.0.0.1:8080 --model <model-name>
 ```
 
-On a machine with an NVIDIA GPU, [Goethe](https://github.com/meshapplied/goethe) (Apache-2.0, by mesh applied) serves open models behind an OpenAI-compatible API. It uses HTTPS with its own certificate and API keys, so point the bridge at it with `--ca-file <goethe folder>/nginx/certs/server.crt` and set `UPSTREAM_API_KEY`. Goethe's docs don't say whether it returns `top_logprobs`; ask the mesh applied mentors or try it.
+On a machine with an NVIDIA GPU, [Goethe](https://github.com/meshapplied/goethe) (Apache-2.0, by mesh applied) serves open models behind an OpenAI-compatible API. It uses HTTPS with its own certificate and API keys, so point the bridge at it with `--ca-file <goethe folder>/nginx/certs/server.crt` and set `UPSTREAM_API_KEY`. Whether it returns `top_logprobs` isn't documented either way — try it, and if not, run the model through a server that does (e.g. vLLM, llama.cpp) for the bridge, and keep Goethe for the larger teacher model you distil from.
 
 Then score it:
 
