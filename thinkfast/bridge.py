@@ -8,6 +8,8 @@ answer text is parsed.
 
     uv run python -m thinkfast.bridge --upstream http://127.0.0.1:8080 --model my-model
 
+Set UPSTREAM_API_KEY if the upstream server needs a key.
+
 This is a deliberately simple starting point, not a strong engine: it makes one
 upstream call per question. The state goes first in the prompt so servers with
 prefix caching can reuse it across questions. Check that your server returns
@@ -19,6 +21,8 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import os
+import ssl
 import string
 import time
 import urllib.request
@@ -100,11 +104,14 @@ def answer_from(question: dict[str, Any], keys: list[str], probs: list[float]) -
 
 class Bridge:
     def __init__(self, upstream: str, model: str, temperature: float = 1.0, top_logprobs: int = 20,
-                 parallel: int = 4, timeout: float = 60.0, api_key: str | None = None):
+                 parallel: int = 4, timeout: float = 60.0, api_key: str | None = None,
+                 ca_file: str | None = None):
         base = upstream.rstrip("/")
         self.url = (base if base.endswith("/v1") else base + "/v1") + "/chat/completions"
         self.model, self.temperature, self.top_logprobs = model, temperature, top_logprobs
         self.timeout, self.api_key = timeout, api_key
+        # servers with a self-signed certificate (e.g. Goethe) need their certificate trusted explicitly
+        self.ssl_context = ssl.create_default_context(cafile=ca_file) if ca_file else None
         self.pool = ThreadPoolExecutor(max_workers=parallel)
 
     def upstream_top_logprobs(self, messages: list[dict[str, str]]) -> list[dict[str, Any]]:
@@ -114,7 +121,7 @@ class Bridge:
         if self.api_key:
             headers["authorization"] = f"Bearer {self.api_key}"
         request = urllib.request.Request(self.url, data=json.dumps(body).encode(), headers=headers)
-        with urllib.request.urlopen(request, timeout=self.timeout) as response:
+        with urllib.request.urlopen(request, timeout=self.timeout, context=self.ssl_context) as response:
             data = json.load(response)
         try:
             return data["choices"][0]["logprobs"]["content"][0]["top_logprobs"]
@@ -187,8 +194,10 @@ def main() -> None:
     parser.add_argument("--temperature", type=float, default=1.0, help="calibration temperature (>1 softens)")
     parser.add_argument("--top-logprobs", type=int, default=20)
     parser.add_argument("--parallel", type=int, default=4, help="questions sent upstream at once")
+    parser.add_argument("--ca-file", help="certificate to trust for an HTTPS upstream with a self-signed certificate")
     args = parser.parse_args()
-    bridge = Bridge(args.upstream, args.model, args.temperature, args.top_logprobs, args.parallel)
+    bridge = Bridge(args.upstream, args.model, args.temperature, args.top_logprobs, args.parallel,
+                    api_key=os.environ.get("UPSTREAM_API_KEY"), ca_file=args.ca_file)
     server = ThreadingHTTPServer((args.host, args.port), make_handler(bridge))
     print(f"decision API on http://{args.host}:{args.port}/v1/systemone -> {bridge.url}")
     server.serve_forever()
