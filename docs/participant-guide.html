@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Participant guide for Think Fast: Local Decision Models, the proximata track at proximata Hackathon '26.">
+<title>Think Fast Participant Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+/* Layout: one reading column (~860px); each section is a heading plus one visual that carries the idea. */
+:root {
+  --bg: #f4f6f9; --surface: #ffffff; --ink: #131a26; --muted: #586377; --line: #dbe0e8;
+  --accent: #2148c9; --accent-2: #6d8ae6; --accent-3: #b5c4f2; --accent-soft: #e6ecfb;
+  --ok: #17875a; --bad: #c63b2f; --gate: #b06d00; --jury: #3d4657; --jury-2: #8a93a3;
+  --on-a: #ffffff; --on-b: #0b1430; --on-c: #131a26; --on-d: #ffffff; --on-e: #131a26;
+  --display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --body: "Inter", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e121a; --surface: #161c27; --ink: #e5e9f0; --muted: #9aa4b6; --line: #2a3242;
+  --accent: #7f9dff; --accent-2: #5674d8; --accent-3: #34488c; --accent-soft: #1b2440;
+  --ok: #3dbd86; --bad: #ef6a5c; --gate: #f0b13d; --jury: #b9c1cf; --jury-2: #7a8396; color-scheme: dark;
+  --accent-2: #4a66c4; --on-a: #0e121a; --on-b: #ffffff; --on-c: #e5e9f0; --on-d: #0e121a; --on-e: #0e121a; } }
+:root[data-theme="dark"] {
+  --bg: #0e121a; --surface: #161c27; --ink: #e5e9f0; --muted: #9aa4b6; --line: #2a3242;
+  --accent: #7f9dff; --accent-2: #5674d8; --accent-3: #34488c; --accent-soft: #1b2440;
+  --ok: #3dbd86; --bad: #ef6a5c; --gate: #f0b13d; --jury: #b9c1cf; --jury-2: #7a8396; color-scheme: dark;
+  --accent-2: #4a66c4; --on-a: #0e121a; --on-b: #ffffff; --on-c: #e5e9f0; --on-d: #0e121a; --on-e: #0e121a; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 400 15px/1.6 var(--body); }
+.wrap { max-width: 860px; margin: 0 auto; padding-block: 40px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 56px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(2rem, 6vw, 3.1rem); font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: 1.45rem; font-weight: 700; }
+h3 { font-size: 1rem; font-weight: 700; }
+p { margin: 0; max-width: 65ch; }
+a { color: var(--accent); }
+code, .mono { font-family: var(--mono); font-size: 0.86em; }
+.eyebrow { font: 600 0.72rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.lede { font-size: 1.12rem; color: var(--ink); }
+.muted { color: var(--muted); }
+.small { font-size: 0.85rem; }
+section { display: grid; gap: 18px; min-width: 0; }
+.head { display: grid; gap: 6px; }
+
+/* hero */
+.hero { display: grid; gap: 16px; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 4px 0 0; list-style: none; }
+.facts li { font-size: 0.82rem; padding: 5px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
+.facts li b { font-weight: 600; }
+
+/* engine diagram */
+.flow { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1.1fr) auto minmax(0,1.1fr); gap: 10px; align-items: stretch; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.panel .label { font: 600 0.7rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.arrow { align-self: center; color: var(--accent); font: 700 1.3rem/1 var(--display); }
+.ticket { font-size: 0.92rem; }
+.q { display: grid; gap: 2px; font-size: 0.88rem; }
+.chip { justify-self: start; font: 600 0.68rem/1 var(--mono); padding: 3px 6px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); }
+.ans { display: grid; gap: 4px; }
+.ans h3 { font: 600 0.78rem/1.3 var(--mono); color: var(--muted); }
+.bar { display: grid; grid-template-columns: 4.6rem minmax(0,1fr) 2.6rem; gap: 8px; align-items: center; font-size: 0.8rem; }
+.bar .track { height: 8px; border-radius: 4px; background: var(--accent-soft); overflow: hidden; }
+.bar .fill { height: 100%; background: var(--accent); border-radius: 4px; }
+.bar .v { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; }
+@media (max-width: 720px) {
+  .flow { grid-template-columns: minmax(0,1fr); }
+  .arrow { transform: rotate(90deg); justify-self: center; }
+}
+
+/* levels */
+.levels { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; counter-reset: lvl; border-top: 1px solid var(--line); }
+.levels li { display: grid; grid-template-columns: 2.4rem 9.5rem minmax(0,1fr); gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.levels li::before { counter-increment: lvl; content: counter(lvl); font: 700 1.1rem/1 var(--display); color: var(--accent); }
+.levels b { font-family: var(--display); font-weight: 700; }
+@media (max-width: 560px) { .levels li { grid-template-columns: 2rem minmax(0,1fr); } .levels li span { grid-column: 2; } }
+
+/* families */
+.fam { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.fam td { padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.fam td:first-child { padding-left: 0; white-space: nowrap; }
+.fam td:nth-child(2) { white-space: nowrap; }
+.scroll { overflow-x: auto; }
+.note { background: var(--accent-soft); border-radius: 8px; padding: 12px 14px; font-size: 0.92rem; }
+
+/* automation explainer */
+.auto { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: grid; gap: 12px; }
+.chart { display: grid; grid-template-columns: repeat(20, minmax(0,1fr)); grid-template-rows: minmax(0, 1fr); gap: 4px; height: 130px; align-items: end; border-bottom: 1px solid var(--line); position: relative; }
+.chart .c { border-radius: 3px 3px 0 0; transition: height .35s ease, opacity .35s ease; }
+.chart .c.ok { background: var(--ok); }
+.chart .c.bad { background: var(--bad); }
+.chart .c.out { opacity: 0.28; }
+.span { display: grid; grid-template-columns: repeat(20, minmax(0,1fr)); gap: 4px; font-size: 0.78rem; }
+.span .in { border-top: 2px solid var(--gate); padding-top: 4px; color: var(--gate); font-weight: 600; white-space: nowrap; }
+.span .rest { border-top: 2px dashed var(--line); padding-top: 4px; color: var(--muted); text-align: right; white-space: nowrap; overflow: hidden; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.8rem; color: var(--muted); }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.btn { justify-self: start; font: 600 0.85rem/1 var(--body); padding: 9px 12px; border-radius: 7px; border: 1px solid var(--accent); background: transparent; color: var(--accent); cursor: pointer; }
+.btn:hover { background: var(--accent-soft); }
+.btn:focus-visible, .copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+#autoText { font-size: 0.95rem; }
+
+/* points */
+.points { display: grid; grid-template-columns: 25fr 15fr 15fr 25fr 20fr; height: 44px; border-radius: 8px; overflow: hidden; }
+.points div { display: grid; place-items: center; font: 700 0.85rem/1 var(--display); }
+.p-a { background: var(--accent); color: var(--on-a); } .p-b { background: var(--accent-2); color: var(--on-b); }
+.p-c { background: var(--accent-3); color: var(--on-c); } .p-d { background: var(--jury); color: var(--on-d); }
+.p-e { background: var(--jury-2); color: var(--on-e); }
+.split { display: grid; grid-template-columns: 55fr 45fr; font-size: 0.78rem; color: var(--muted); gap: 8px; }
+.split span:last-child { text-align: right; }
+.cats { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.cats td { padding: 8px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.cats td:first-child { padding-left: 0; white-space: nowrap; font-weight: 600; }
+.cats td:nth-child(2) { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+
+/* baseline */
+.engines { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+.engine { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.engine .meta { font-size: 0.8rem; color: var(--muted); }
+.engine .bar { grid-template-columns: 6.2rem minmax(0,1fr) 3rem; }
+.engine .bar .fill.auto { background: var(--gate); }
+@media (max-width: 620px) { .engines { grid-template-columns: minmax(0,1fr); } }
+
+/* quick start */
+.cmds { display: grid; gap: 10px; }
+.cmd { display: grid; gap: 6px; }
+.cmd .what { font-size: 0.85rem; color: var(--muted); }
+.code { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+.code pre { margin: 0; padding: 12px 70px 12px 14px; overflow-x: auto; font: 400 0.82rem/1.55 var(--mono); }
+.copy { position: absolute; top: 8px; right: 8px; font: 600 0.72rem/1 var(--body); padding: 6px 8px; border-radius: 5px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); cursor: pointer; }
+
+/* pitfalls + rules */
+.tips { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.tips li { display: grid; gap: 2px; padding-left: 14px; border-left: 3px solid var(--gate); }
+.tips b { font-weight: 600; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 24px; }
+.two ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+@media (max-width: 620px) { .two { grid-template-columns: minmax(0,1fr); } }
+.terms { display: grid; grid-template-columns: max-content minmax(0,1fr); gap: 6px 16px; font-size: 0.9rem; margin: 0; }
+.terms dt { font-weight: 600; }
+.terms dd { margin: 0; color: var(--muted); }
+@media (max-width: 520px) { .terms { grid-template-columns: minmax(0,1fr); } .terms dd { margin-bottom: 8px; } }
+footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px; display: grid; gap: 6px; }
+@media (prefers-reduced-motion: reduce) { .chart .c { transition: none; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="hero">
+    <span class="eyebrow">proximata Hackathon '26 · Participant guide</span>
+    <h1>Think Fast: Local Decision Models</h1>
+    <p class="lede">Build an engine that answers typed questions with honest probabilities, in milliseconds, on your own hardware. Then use it to clean a messy dataset: automate the calls it is sure about and send the rest to a person.</p>
+    <ul class="facts">
+      <li><b>13–14 Nov 2026</b> · Home of Innovation, Vienna</li>
+      <li>Teams of <b>2–4</b></li>
+      <li>Code freeze <b>Sat 14:00</b> (TBC)</li>
+      <li>Your engine serves <b>port 8009</b></li>
+      <li>Graded with the <b>network off</b></li>
+    </ul>
+  </header>
+
+  <section>
+    <div class="head">
+      <h2>What a decision engine does</h2>
+      <p class="muted">It reads the input once and returns a probability for every answer you defined. It writes no text.</p>
+    </div>
+    <div class="flow" aria-label="Example request and response">
+      <div class="panel">
+        <span class="label">State: the input</span>
+        <div class="ticket"><span class="mono muted">channel: email</span><br>“I was charged twice for order #48213.”</div>
+      </div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="panel">
+        <span class="label">Questions you define</span>
+        <div class="q"><span class="chip">choice</span>Which team should handle this ticket?</div>
+        <div class="q"><span class="chip">score</span>How urgent is it? low → critical</div>
+        <div class="q"><span class="chip">noul · yes/no</span>Should a person look first?</div>
+      </div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="panel">
+        <span class="label">Probabilities back</span>
+        <div class="ans"><h3>team</h3>
+          <div class="bar"><span>billing</span><span class="track"><span class="fill" style="width:93%; display:block"></span></span><span class="v">0.93</span></div>
+          <div class="bar"><span>shipping</span><span class="track"><span class="fill" style="width:7%; display:block"></span></span><span class="v">0.07</span></div>
+        </div>
+        <div class="ans"><h3>urgency</h3>
+          <div class="bar"><span>normal</span><span class="track"><span class="fill" style="width:20%; display:block"></span></span><span class="v">0.20</span></div>
+          <div class="bar"><span>high</span><span class="track"><span class="fill" style="width:65%; display:block"></span></span><span class="v">0.65</span></div>
+        </div>
+        <div class="ans"><h3>needs_human</h3>
+          <div class="bar"><span>yes</span><span class="track"><span class="fill" style="width:81%; display:block"></span></span><span class="v">0.81</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="small muted">One endpoint: <code>POST /v1/systemone</code>, the same format Kev and other open decision models already speak. Full contract in <code>docs/decision-api.md</code>.</p>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2>Five levels</h2>
+      <p class="muted">Each level is a demo on its own. Go as far as you can.</p>
+    </div>
+    <ol class="levels">
+      <li><b>Serve it</b><span>A local engine on the decision API that passes the starter repo's evaluation runner.</span></li>
+      <li><b>Make it honest</b><span>Calibrate: when it says 90%, it should be right 9 times in 10. Measure Brier and calibration error, then fix them (temperature scaling is a good start).</span></li>
+      <li><b>Make it fast</b><span>Several questions per request, fast at p95. Read the input once and share it across questions; cache, batch, quantise.</span></li>
+      <li><b>Make it yours</b><span>Fine-tune or distil for data work, without losing the task types you have never seen.</span></li>
+      <li><b>Put it to work</b><span>A tool on the messy product catalogue: automate above a threshold, send the rest to a review queue, report the share automated at 5% errors.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2>Practice data</h2>
+      <p class="muted">The repo generates a dev suite of five data-work families: 1,000 requests and 1,400 questions. Change the seed for unlimited training data.</p>
+    </div>
+    <div class="scroll">
+      <table class="fam">
+        <tbody>
+          <tr><td><code>column_type</code></td><td><span class="chip">choice · 14</span></td><td>What kind of data is in this column? The header can lie.</td></tr>
+          <tr><td><code>product_match</code></td><td><span class="chip">yes/no</span></td><td>Do these two shop listings sell the same product?</td></tr>
+          <tr><td><code>value_check</code></td><td><span class="chip">yes/no</span></td><td>Does this value obey the column's rule?</td></tr>
+          <tr><td><code>row_issue</code></td><td><span class="chip">choice · 6</span></td><td>What, if anything, is wrong with this order row?</td></tr>
+          <tr><td><code>ticket_triage</code></td><td><span class="chip">3 questions</span></td><td>Which team? How urgent? Does a person need to look?</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>The grading suite is not this file.</b> It has fresh data for these five families plus task families that are not in the repo. An engine that only knows these five won't do well.</p>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2>The number that matters: automation rate</h2>
+      <p class="muted">Sort every decision by confidence. Automate from the top down while errors stay at or below 5%. The share you get through is your automation rate.</p>
+    </div>
+    <div class="auto">
+      <div class="chart" id="chart" role="img" aria-label="20 example decisions sorted by confidence"></div>
+      <div class="span" id="span"></div>
+      <div class="legend"><span><i style="background:var(--ok)"></i>right</span><span><i style="background:var(--bad)"></i>wrong</span><span>bar height = confidence</span><span>faded = sent to a person</span></div>
+      <p id="autoText"></p>
+      <button class="btn" id="toggle" type="button" aria-pressed="false">Make the confident mistake less sure</button>
+      <p class="small muted">Illustration with 20 made-up decisions, scored with the same rule as <code>thinkfast/metrics.py</code>.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2>How you're scored</h2>
+      <p class="muted">Out of 100. A to C are measured automatically on the hidden suite, on the reference machine, with the network off.</p>
+    </div>
+    <div class="points" aria-hidden="true">
+      <div class="p-a">A 25</div><div class="p-b">B 15</div><div class="p-c">C 15</div><div class="p-d">D 25</div><div class="p-e">E 20</div>
+    </div>
+    <div class="split"><span>Measured by the runner · 55</span><span>Jury · 45</span></div>
+    <div class="scroll">
+      <table class="cats">
+        <tbody>
+          <tr><td>A. Automation rate</td><td>25</td><td>Share of hidden-suite decisions automated at ≤5% errors, relative to the best team</td></tr>
+          <tr><td>B. Accuracy &amp; calibration</td><td>15</td><td>Accuracy (10) and Brier score (5), relative to the best team</td></tr>
+          <tr><td>C. Speed</td><td>15</td><td>p95 latency per request on the reference machine (tiers TBC)</td></tr>
+          <tr><td>D. Put it to work</td><td>25</td><td>Your data tool, its review queue and the live demo</td></tr>
+          <tr><td>E. Engineering</td><td>20</td><td>Starts from the README on a clean machine with the network off; tests; an honest REPORT.md</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small muted">Hard fails: calling a hosted model API at inference time, or training on or looking up the hidden suite. If your engine doesn't start from the README on the reference machine, A–C score 0.</p>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2>Baseline to beat</h2>
+      <p class="muted">Our dry run on 12 Nov, out of the box, no tuning, on the dev suite.</p>
+    </div>
+    <div class="engines">
+      <div class="engine">
+        <h3>Kev-0.8B</h3>
+        <span class="meta">4 GB laptop GPU (Quadro T1000) · 1,000 requests</span>
+        <div class="bar"><span>accuracy</span><span class="track"><span class="fill" style="width:66.2%; display:block"></span></span><span class="v">66%</span></div>
+        <div class="bar"><span>automation</span><span class="track"><span class="fill auto" style="width:28.7%; display:block"></span></span><span class="v">29%</span></div>
+        <div class="bar"><span>p95 latency</span><span></span><span class="v">2.4 s</span></div>
+      </div>
+      <div class="engine">
+        <h3>Bridge + Qwen3.5-0.8B</h3>
+        <span class="meta">llama.cpp on a 12-thread CPU · first 200 requests</span>
+        <div class="bar"><span>accuracy</span><span class="track"><span class="fill" style="width:52.8%; display:block"></span></span><span class="v">53%</span></div>
+        <div class="bar"><span>automation</span><span class="track"><span class="fill auto" style="width:9.5%; display:block"></span></span><span class="v">10%</span></div>
+        <div class="bar"><span>p95 latency</span><span></span><span class="v">2.7 s</span></div>
+      </div>
+    </div>
+    <p class="small muted">Automation rate is noisy: Kev's 95% range on 1,000 requests was 22–41%. Run the full suite before you compare two versions.</p>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2>Quick start</h2>
+      <p class="muted">Needs <a href="https://docs.astral.sh/uv/">uv</a>. The kit itself is plain Python 3.11+ with no dependencies.</p>
+    </div>
+    <div class="cmds">
+      <div class="cmd"><span class="what">1. Get the kit and generate the data</span>
+        <div class="code"><pre><code>git clone https://github.com/proximata/hackathon-26-think-fast.git && cd hackathon-26-think-fast
+uv run python -m thinkfast.suite      # data/dev.jsonl
+uv run python -m thinkfast.messy      # data/catalogue_messy.csv + answer key</code></pre><button class="copy" type="button">Copy</button></div></div>
+      <div class="cmd"><span class="what">2. Start an engine on port 8009 (Kev, in its own folder)</span>
+        <div class="code"><pre><code>git clone https://github.com/jaredpalmer/kev.git && cd kev
+uv sync --extra serve
+uv run --extra serve python -m kev.serve --run jaredpalmer/kev-0.8b --port 8009</code></pre><button class="copy" type="button">Copy</button></div></div>
+      <div class="cmd"><span class="what">3. Score it (from the kit folder)</span>
+        <div class="code"><pre><code>uv run python -m thinkfast.run_eval --suite data/dev.jsonl --limit 200   # quick check
+uv run python -m thinkfast.run_eval --suite data/dev.jsonl               # full dev suite</code></pre><button class="copy" type="button">Copy</button></div></div>
+    </div>
+    <p class="small muted">Prefer your own model? <code>thinkfast/bridge.py</code> turns any local OpenAI-compatible server that returns <code>top_logprobs</code> into an engine. See the README.</p>
+  </section>
+
+  <section>
+    <div class="head"><h2>Lessons from our dry run</h2></div>
+    <ul class="tips">
+      <li><b>Download everything the night before.</b><span class="muted">Kev's install pulled a 6.9 GB environment (6.6 min), and the first start took about 10 more minutes for the weights. Venue Wi-Fi will be shared.</span></li>
+      <li><b>Turn thinking off for chat models.</b><span class="muted">Qwen3.5 starts its reply with “Thinking”, so the bridge finds no answer letter and every question becomes a uniform guess. With llama.cpp, start <code>llama-server</code> with <code>--reasoning off</code>.</span></li>
+      <li><b>Rehearse with Wi-Fi off.</b><span class="muted">Start your engine from your own README and run the evaluation without a network. Kev restarted offline in 91 s from cached weights.</span></li>
+      <li><b>A small GPU is enough to start.</b><span class="muted">Kev-0.8B ran on a 4 GB laptop GPU, using 3.9 GB. Speed depends mostly on hardware and kernels.</span></li>
+      <li><b>Calibrate on data you didn't fit on.</b><span class="muted">One temperature fitted on half the dev answers cut Kev's calibration error on the other half from 0.078 to 0.047.</span></li>
+    </ul>
+  </section>
+
+  <section class="two">
+    <div class="head" style="gap:10px">
+      <h2>House rules</h2>
+      <ul>
+        <li>Local only at grading: no hosted model APIs at inference time. Cloud is fine for training.</li>
+        <li>Open weights only; respect every licence, including the terms of any model you generate training data with.</li>
+        <li>Don't train on or look up the hidden suite.</li>
+      </ul>
+    </div>
+    <div class="head" style="gap:10px">
+      <h2>Submit</h2>
+      <ul>
+        <li>One documented command that starts your engine on port 8009 from a clean checkout. Weights come from a separate setup step.</li>
+        <li>A <code>REPORT.md</code>: your dev-suite numbers from the runner, the model and hardware you measured on, and what you'd do next.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="head"><h2>Reading the numbers</h2></div>
+    <dl class="terms">
+      <dt>Accuracy</dt><dd>Share of questions where your most likely answer is right.</dd>
+      <dt>Brier score</dt><dd>How far your probabilities are from the truth. 0 is perfect, lower is better.</dd>
+      <dt>Calibration error</dt><dd>Gap between how sure you say you are and how often you're right.</dd>
+      <dt>Automation rate</dt><dd>Share of decisions you can take alone with at most 5% errors. The headline number.</dd>
+      <dt>p95 latency</dt><dd>95% of requests finish faster than this.</dd>
+    </dl>
+  </section>
+
+  <footer>
+    <span>Full brief: <code>CASE.md</code> · API: <code>docs/decision-api.md</code> · Starter kit: <a href="https://github.com/proximata/hackathon-26-think-fast">github.com/proximata/hackathon-26-think-fast</a></span>
+    <span>Open models and code: <a href="https://github.com/jaredpalmer/kev">Kev</a>, <a href="https://github.com/TheoLeeCJ/SemIf-OpenJev">SemIf</a>, <a href="https://github.com/githubnext/localjev">LocalJev</a>, <a href="https://github.com/meshapplied/goethe">Goethe</a> (needs an Ampere or newer NVIDIA GPU). Items marked TBC are confirmed at kick-off.</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  // 20 made-up decisions; two are wrong. Same rule as thinkfast/metrics.py automation_rate.
+  var base = [
+    [0.99,1],[0.98,1],[0.97,1],[0.95,1],[0.93,1],[0.91,1],[0.88,1],[0.86,1],[0.84,0],[0.81,1],
+    [0.78,1],[0.74,1],[0.70,1],[0.66,0],[0.62,1],[0.58,1],[0.54,1],[0.50,1],[0.45,1],[0.40,1]
+  ];
+  var chart = document.getElementById('chart'), span = document.getElementById('span');
+  var text = document.getElementById('autoText'), btn = document.getElementById('toggle');
+  var softened = false;
+
+  function automate(ds) {
+    var best = 0, errors = 0;
+    for (var j = 0; j < ds.length; j++) {
+      errors += ds[j][1] ? 0 : 1;
+      if (errors <= 0.05 * (j + 1)) best = j + 1;
+    }
+    return best;
+  }
+
+  function render() {
+    var ds = base.map(function (d) { return d.slice(); });
+    if (softened) ds[8][0] = 0.52;
+    ds.sort(function (a, b) { return b[0] - a[0]; });
+    var k = automate(ds);
+    chart.innerHTML = '';
+    ds.forEach(function (d, i) {
+      var c = document.createElement('div');
+      c.className = 'c ' + (d[1] ? 'ok' : 'bad') + (i < k ? '' : ' out');
+      c.style.height = (d[0] * 100) + '%';
+      c.title = (d[1] ? 'right' : 'wrong') + ', ' + Math.round(d[0] * 100) + '% sure';
+      chart.appendChild(c);
+    });
+    span.innerHTML = '<span class="in" style="grid-column: 1 / ' + (k + 1) + '">automated ' + k + '/20</span>' +
+      '<span class="rest" style="grid-column: ' + (k + 1) + ' / 21">to a person</span>';
+    var pct = Math.round(k / 20 * 100);
+    text.innerHTML = softened
+      ? '<b>' + pct + '% automated.</b> Same answers, same accuracy. The engine was only 52% sure about the mistake, so it sinks below the line and stops blocking the confident right answers.'
+      : '<b>' + pct + '% automated.</b> The engine was 84% sure of a wrong answer. Everything below that mistake goes to a person, because letting it through would put errors above 5%.';
+    btn.textContent = softened ? 'Undo' : 'Make the confident mistake less sure';
+    btn.setAttribute('aria-pressed', softened ? 'true' : 'false');
+  }
+  btn.addEventListener('click', function () { softened = !softened; render(); });
+  render();
+
+  document.querySelectorAll('.copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var code = b.parentElement.querySelector('code');
+      var done = function (label) { b.textContent = label; setTimeout(function () { b.textContent = 'Copy'; }, 1500); };
+      var select = function () {
+        var r = document.createRange(); r.selectNodeContents(code);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); done('Selected');
+      };
+      try {
+        navigator.clipboard.writeText(code.innerText).then(function () { done('Copied'); }, select);
+      } catch (e) { select(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
