@@ -301,7 +301,7 @@ footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--li
         </tbody>
       </table>
     </div>
-    <p class="small muted">Bands: low is 0–30% of a category's points, mid 30–70%, high 70–100%. Tie-breakers: B, then C. The full band table is in <code>CASE.md</code>.</p>
+    <p class="small muted">Bands: low is 0–30% of a category's points, mid 30–70%, high 70–100%. Tie-breakers: B, then C. The full criteria are in <code>CASE.md</code>.</p>
     <div>
       <h3>Your 5-minute demo, in this order</h3>
       <ol class="demo">
@@ -360,13 +360,16 @@ uv run python -m thinkfast.run_eval --suite data/dev.jsonl               # full 
   </section>
 
   <section>
-    <div class="head"><h2>Lessons from our dry run</h2></div>
+    <div class="head"><h2>Lessons from our dry run, and from a course</h2></div>
     <ul class="tips">
       <li><b>Download everything the night before.</b><span class="muted">Kev's install pulled a 6.9 GB environment (6.6 min), and the first start took about 10 more minutes for the weights. Venue Wi-Fi will be shared.</span></li>
       <li><b>Turn thinking off for chat models.</b><span class="muted">Qwen3.5 starts its reply with “Thinking”, so the bridge finds no answer letter and every question becomes a uniform guess. With llama.cpp, start <code>llama-server</code> with <code>--reasoning off</code>.</span></li>
       <li><b>Rehearse with Wi-Fi off.</b><span class="muted">Start your engine from your own README and run the evaluation without a network. Kev restarted offline in 91 s from cached weights.</span></li>
       <li><b>A small GPU is enough to start.</b><span class="muted">Kev-0.8B ran on a 4 GB laptop GPU, using 3.9 GB. Speed depends mostly on hardware and kernels.</span></li>
       <li><b>Calibrate on data you didn't fit on.</b><span class="muted">One temperature fitted on half the dev answers cut Kev's calibration error on the other half from 0.078 to 0.047.</span></li>
+      <li><b>Try temperature scaling before distillation.</b><span class="muted">In the <a href="https://earino.github.io/applied-deep-learning/">Applied Deep Learning</a> course (CEU), one fitted number beat an 80-minute distillation run on calibration error. For an engine, that means rescaling the probabilities it returns.</span></li>
+      <li><b>Measure before you quantize.</b><span class="muted">Same course: bitsandbytes int8 ran about 2.5× slower than fp16 on sub-7B models on a T4 GPU, and used more memory.</span></li>
+      <li><b>Show the range, not just the number.</b><span class="muted">Resample your test set (a bootstrap) to see whether a gain is bigger than the noise, and check your weakest slice, such as the rarest labels.</span></li>
     </ul>
   </section>
 
@@ -382,7 +385,7 @@ uv run python -m thinkfast.run_eval --suite data/dev.jsonl               # full 
     <div class="head" style="gap:10px">
       <h2>Submit</h2>
       <ul>
-        <li>The standard submission: public MIT repo in the proximata organisation, README, 3-minute video, written submission.</li>
+        <li>The standard submission: a public MIT repo on your own GitHub account, README, 3-minute video, written submission.</li>
         <li>A <code>REPORT.md</code> that starts with the scorecard from <code>docs/REPORT_TEMPLATE.md</code>.</li>
         <li>One command that reproduces your held-out numbers.</li>
       </ul>
@@ -405,7 +408,7 @@ uv run python -m thinkfast.run_eval --suite data/dev.jsonl               # full 
 
   <footer>
     <span>Full brief: <code>CASE.md</code> · API: <code>docs/decision-api.md</code> · Starter kit: <a href="https://github.com/proximata/hackathon-26-think-fast">github.com/proximata/hackathon-26-think-fast</a></span>
-    <span>Open models and code: <a href="https://github.com/jaredpalmer/kev">Kev</a>, <a href="https://github.com/TheoLeeCJ/SemIf-OpenJev">SemIf</a>, <a href="https://github.com/githubnext/localjev">LocalJev</a>, <a href="https://github.com/meshapplied/goethe">Goethe</a> (needs an Ampere or newer NVIDIA GPU). Problems: <a href="https://earino.github.io/dataset-factory-site/">Dataset Factory</a>. Reading: <a href="https://airbnb.tech/ai-ml/frontier-quality-at-1-of-the-cost-a-production-benchmark-of-llm-classifiers/">Airbnb's LLM classifier benchmark</a>.</span>
+    <span>Open models and code: <a href="https://github.com/jaredpalmer/kev">Kev</a>, <a href="https://github.com/TheoLeeCJ/SemIf-OpenJev">SemIf</a>, <a href="https://github.com/githubnext/localjev">LocalJev</a>, <a href="https://github.com/meshapplied/goethe">Goethe</a> (needs an Ampere or newer NVIDIA GPU). Problems: <a href="https://earino.github.io/dataset-factory-site/">Dataset Factory</a>. Optional extras: <code>docs/further-resources.md</code>. Reading: <a href="https://airbnb.tech/ai-ml/frontier-quality-at-1-of-the-cost-a-production-benchmark-of-llm-classifiers/">Airbnb's LLM classifier benchmark</a>.</span>
   </footer>
 </div>
 

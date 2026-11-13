@@ -13,6 +13,7 @@ You choose the problem. This kit is optional help: a starter problem with a test
 | [CASE.md](CASE.md) | The case brief: challenge, steps, rules, judging |
 | [docs/REPORT_TEMPLATE.md](docs/REPORT_TEMPLATE.md) | Copy it to `REPORT.md` in your repo: the scorecard the jury reads during your demo |
 | [docs/decision-api.md](docs/decision-api.md) | The one endpoint your engine must serve |
+| [docs/further-resources.md](docs/further-resources.md) | Optional extras: a free deep-learning course on calibration, LoRA, quantization and distillation, and what carries over to a decision engine |
 | [docs/participant-guide.html](docs/participant-guide.html) | One-page visual guide: the challenge, how you're judged, the starter problem and its baseline numbers. Download it and open it in a browser |
 | `thinkfast/suite.py` | Starter problem: generates the dev suite (five data-work task families), or unlimited training and test data with other seeds |
 | `thinkfast/run_eval.py` | Runs a suite against your engine: accuracy, Brier score, calibration error, automation rate at a 5% error budget, latency. Works on your own problem too |
