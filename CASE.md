@@ -46,7 +46,7 @@ You choose the problem. Bring your own data, take a ready-made task from Dataset
 Each step is a demo on its own; go as far as you can.
 
 - **Pick a problem worth solving:** judgment calls that someone makes often, today by hand, with rules or with a big hosted model. Airbnb's four tests for when a small tuned model pays off: the volume is high, the latency is tight, you need a threshold rather than a verdict, and you have labelled data. Tell us who has the problem, what it costs them today and why it should run locally.
-- **Build the engine:** a model that answers your questions with probabilities on your own machine. Start from an open decision model such as Kev, from any small open model through the starter kit's bridge, or from a classic classifier. Serve it behind the open decision API (`POST /v1/systemone`) and the starter kit's runner scores it for you.
+- **Build the engine:** a model that answers your questions with probabilities on your own machine. Start from an open decision model such as Kev, from any small open model through the starter kit's bridge, or train a classifier that gives one probability per label, from a logistic regression to a fine-tuned ModernBERT or a small LLM with a classification head. Serve it behind the open decision API (`POST /v1/systemone`) and the starter kit's runner scores it for you.
 - **Prove it:** hold out test data that you never train, prompt or tune on, and split it by time if your data has dates. Put a simple baseline next to your model, such as the most common answer, a few rules or a logistic regression, and a big model as a reference if you can. Report a metric that fits the problem, and show that your confidence is honest.
 - **Make it yours:** fine-tune, distil a bigger teacher into a small student, train a new head, or label your own data. Show what each change gained.
 - **Make it fast and cheap:** measure latency and the cost per million decisions on your hardware, next to a hosted model doing the same job. Run it with Wi-Fi off.
@@ -68,6 +68,10 @@ Each step is a demo on its own; go as far as you can.
   - the Best use of Adaption prize, open to this track
 
   If you train a model there, check that you can download it and run it on your own machine. Adaption can also generate or clean training data.
+- **Learning to fine-tune in a day:** [Applied Deep Learning](https://earino.github.io/applied-deep-learning/), a CEU course by E. Ariño de la Rubia (CC BY 4.0):
+  - short modules on calibration, LoRA, quantization and distillation
+  - notebooks that run on free Kaggle or Colab GPUs
+  - a worked problem: routing consumer complaints into 113 categories, with fine-tuned open checkpoints and precomputed outputs from a 32B teacher for distillation on the Hugging Face Hub. Check each checkpoint's licence
 - **Reading:** the Airbnb benchmark above, for how a production team decided when a small fine-tuned model beats a frontier one.
 
 ### House Rules

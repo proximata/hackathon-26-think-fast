@@ -80,6 +80,14 @@ If your engine serves the decision API, the runner scores any problem written as
 
 Labels are the option name for `choice`, `true` or `false` for `noul`, and the level index (0, 1, 2, …) for `score`. The full question format is in [docs/decision-api.md](docs/decision-api.md).
 
+## Measured lessons worth knowing
+
+From the [Applied Deep Learning](https://earino.github.io/applied-deep-learning/) course (E. Ariño de la Rubia, CEU), measured on a 113-label complaint-routing task:
+
+- **Try temperature scaling before distillation.** One fitted number beat an 80-minute distillation run on calibration error ([blog](https://earino.github.io/applied-deep-learning/site/blog/12_temperature_scaling_beats_distillation.html)).
+- **Measure before you quantize.** bitsandbytes int8 ran about 2.5× slower than fp16 on sub-7B models on a T4 GPU, and used more memory ([blog](https://earino.github.io/applied-deep-learning/site/blog/11_int8_is_slower.html)).
+- **Data beats scale on a long tail.** With the same fine-tuning setup, 1.5B, 3B and 8B models scored 0.250, 0.270 and 0.271 macro F1 ([blog](https://earino.github.io/applied-deep-learning/site/blog/08_cant_scale_out_of_data_problem.html)).
+
 ## How you're judged
 
 The track jury scores every team out of 100 during its demo slot: a problem worth solving (20), evidence it works on held-out data (30), local, fast and cheap (20), put to work (20), and what you made yours (10). A few gates come first, such as a filled-in `REPORT.md` scorecard. There's no hidden test suite: you bring the evidence. Details in [CASE.md](CASE.md#judging-criteria).

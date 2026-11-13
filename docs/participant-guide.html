@@ -233,7 +233,7 @@ footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--li
     </div>
     <div class="ways">
       <div class="way"><h3>Your own</h3><span class="muted">Routing, policy checks, deduplication, triage: calls someone makes thousands of times. Your data, or any public data you're allowed to use.</span></div>
-      <div class="way"><h3>Dataset Factory</h3><span class="muted"><a href="https://earino.github.io/dataset-factory-site/">Ready-made yes/no tasks</a> from public data, with time-ordered splits and baselines to beat. Check each licence; link the data, don't commit it.</span></div>
+      <div class="way"><h3>Dataset Factory</h3><span class="muted"><a href="https://earino.github.io/dataset-factory-site/">Ready-made yes/no tasks</a> from public data, with time-ordered splits and baselines to beat. Check each licence; link the data, don't commit it. New to fine-tuning? The <a href="https://earino.github.io/applied-deep-learning/">Applied Deep Learning</a> course has a worked complaint-routing problem with open checkpoints.</span></div>
       <div class="way"><h3>Our starter problem</h3><span class="muted">Five data-work task families, a messy catalogue, a scorer and baselines, all in this kit. Below.</span></div>
     </div>
     <p class="note"><b>Is it a good problem?</b> Airbnb's four tests for when a small tuned model pays off: the volume is high, the latency is tight, you need a threshold rather than a verdict, and you have labelled data. Their 2B model matched frontier models on one policy check at a median 35 ms and about 1% of the cost (<a href="https://airbnb.tech/ai-ml/frontier-quality-at-1-of-the-cost-a-production-benchmark-of-llm-classifiers/">the benchmark</a>).</p>
@@ -360,13 +360,16 @@ uv run python -m thinkfast.run_eval --suite data/dev.jsonl               # full 
   </section>
 
   <section>
-    <div class="head"><h2>Lessons from our dry run</h2></div>
+    <div class="head"><h2>Lessons from our dry run, and from a course</h2></div>
     <ul class="tips">
       <li><b>Download everything the night before.</b><span class="muted">Kev's install pulled a 6.9 GB environment (6.6 min), and the first start took about 10 more minutes for the weights. Venue Wi-Fi will be shared.</span></li>
       <li><b>Turn thinking off for chat models.</b><span class="muted">Qwen3.5 starts its reply with “Thinking”, so the bridge finds no answer letter and every question becomes a uniform guess. With llama.cpp, start <code>llama-server</code> with <code>--reasoning off</code>.</span></li>
       <li><b>Rehearse with Wi-Fi off.</b><span class="muted">Start your engine from your own README and run the evaluation without a network. Kev restarted offline in 91 s from cached weights.</span></li>
       <li><b>A small GPU is enough to start.</b><span class="muted">Kev-0.8B ran on a 4 GB laptop GPU, using 3.9 GB. Speed depends mostly on hardware and kernels.</span></li>
       <li><b>Calibrate on data you didn't fit on.</b><span class="muted">One temperature fitted on half the dev answers cut Kev's calibration error on the other half from 0.078 to 0.047.</span></li>
+      <li><b>Try temperature scaling before distillation.</b><span class="muted">In the <a href="https://earino.github.io/applied-deep-learning/">Applied Deep Learning</a> course (CEU), one fitted number beat an 80-minute distillation run on calibration error.</span></li>
+      <li><b>Measure before you quantize.</b><span class="muted">Same course: bitsandbytes int8 ran about 2.5× slower than fp16 on sub-7B models on a T4 GPU, and used more memory.</span></li>
+      <li><b>Show the range, not just the number.</b><span class="muted">Resample your test set (a bootstrap) to see whether a gain is bigger than the noise, and check your weakest slice, such as the rarest labels.</span></li>
     </ul>
   </section>
 

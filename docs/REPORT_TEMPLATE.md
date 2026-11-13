@@ -18,6 +18,8 @@ Every number must come from a command in your repo. "Not measured" is a fine ans
 | Metric, and why it fits the problem | |
 | Simple baseline on the test set | |
 | Your model on the test set | |
+| Is the gap real? Bootstrap 95% range on the difference to the baseline | |
+| Weakest slice (rare labels, a segment): baseline vs your model there | |
 | Big-model reference on the test set (optional) | |
 | Threshold: share decided automatically, and the error rate there | |
 | Calibration: Brier score or calibration error, before → after | |
@@ -29,6 +31,7 @@ Every number must come from a command in your repo. "Not measured" is a fine ans
 | Command that reproduces the test-set numbers | |
 | Demo video | |
 | Known limits | |
+| What you'd ship, and when you'd still pick the big model | |
 
 ## Is it a good problem?
 
@@ -56,12 +59,16 @@ The model, what you changed and why, and how you chose the threshold.
 
 ## Results
 
-The test-set numbers next to the baseline, with the command that produced them. One table is enough.
+The test-set numbers next to the baseline, with the command that produced them. One table is enough. Point estimates aren't claims: resample the test set (a bootstrap) to show the range of each difference, and check the slice where your model is weakest, such as the rarest labels.
 
 Cost per million decisions, roughly:
 
 - **On your own hardware:** what the machine costs per hour (rental price, or purchase price spread over its life), divided by decisions per hour, times 1,000,000.
 - **Hosted model:** input and output tokens per decision times the list price, times 1,000,000.
+
+## Recommendation
+
+What would you ship for this problem, under which constraints (quality, latency, cost, privacy)? When would the big hosted model still be worth its price?
 
 ## Limits and next steps
 
