@@ -4,8 +4,9 @@
         --endpoint http://127.0.0.1:8009/v1/systemone
 
 Requests go one at a time, so the latency numbers are per request. The first
-few requests warm the engine up and are left out of the latency figures. The
-organisers grade with this same script on the reference machine.
+few requests warm the engine up and are left out of the latency figures. It
+scores any suite in this format, so you can write your own problem as JSON lines
+and measure it the same way.
 """
 
 from __future__ import annotations
