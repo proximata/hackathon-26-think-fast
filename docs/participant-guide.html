@@ -76,7 +76,7 @@ section { display: grid; gap: 18px; min-width: 0; }
 
 /* levels */
 .levels { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; counter-reset: lvl; border-top: 1px solid var(--line); }
-.levels li { display: grid; grid-template-columns: 2.4rem 9.5rem minmax(0,1fr); gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.levels li { display: grid; grid-template-columns: 2.4rem 11rem minmax(0,1fr); gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
 .levels li::before { counter-increment: lvl; content: counter(lvl); font: 700 1.1rem/1 var(--display); color: var(--accent); }
 .levels b { font-family: var(--display); font-weight: 700; }
 @media (max-width: 560px) { .levels li { grid-template-columns: 2rem minmax(0,1fr); } .levels li span { grid-column: 2; } }
@@ -107,13 +107,20 @@ section { display: grid; gap: 18px; min-width: 0; }
 #autoText { font-size: 0.95rem; }
 
 /* points */
-.points { display: grid; grid-template-columns: 25fr 15fr 15fr 25fr 20fr; height: 44px; border-radius: 8px; overflow: hidden; }
+.points { display: grid; grid-template-columns: 20fr 30fr 20fr 20fr 10fr; height: 44px; border-radius: 8px; overflow: hidden; }
 .points div { display: grid; place-items: center; font: 700 0.85rem/1 var(--display); }
 .p-a { background: var(--accent); color: var(--on-a); } .p-b { background: var(--accent-2); color: var(--on-b); }
 .p-c { background: var(--accent-3); color: var(--on-c); } .p-d { background: var(--jury); color: var(--on-d); }
 .p-e { background: var(--jury-2); color: var(--on-e); }
-.split { display: grid; grid-template-columns: 55fr 45fr; font-size: 0.78rem; color: var(--muted); gap: 8px; }
-.split span:last-child { text-align: right; }
+.ways { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+.way { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; display: grid; gap: 6px; align-content: start; min-width: 0; font-size: 0.9rem; }
+@media (max-width: 680px) { .ways { grid-template-columns: minmax(0,1fr); } }
+.gates { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 0.92rem; }
+.cats th { text-align: left; font: 600 0.72rem/1.2 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding: 6px 8px; border-bottom: 1px solid var(--line); }
+.cats th:first-child { padding-left: 0; }
+.demo { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; counter-reset: dm; }
+.demo li { display: grid; grid-template-columns: 2rem minmax(0,1fr); gap: 8px; font-size: 0.92rem; }
+.demo li::before { counter-increment: dm; content: counter(dm); font: 700 1rem/1.5 var(--display); color: var(--accent); }
 .cats { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
 .cats td { padding: 8px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
 .cats td:first-child { padding-left: 0; white-space: nowrap; font-weight: 600; }
@@ -128,8 +135,9 @@ section { display: grid; gap: 18px; min-width: 0; }
 @media (max-width: 620px) { .engines { grid-template-columns: minmax(0,1fr); } }
 
 /* quick start */
-.cmds { display: grid; gap: 10px; }
-.cmd { display: grid; gap: 6px; }
+.cmds { display: grid; gap: 10px; min-width: 0; }
+.cmd { display: grid; gap: 6px; min-width: 0; }
+.code { min-width: 0; }
 .cmd .what { font-size: 0.85rem; color: var(--muted); }
 .code { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
 .code pre { margin: 0; padding: 12px 70px 12px 14px; overflow-x: auto; font: 400 0.82rem/1.55 var(--mono); }
@@ -157,13 +165,13 @@ footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--li
   <header class="hero">
     <span class="eyebrow">proximata Hackathon '26 · Participant guide</span>
     <h1>Think Fast: Local Decision Models</h1>
-    <p class="lede">Build an engine that answers typed questions with honest probabilities, in milliseconds, on your own hardware. Then use it to clean a messy dataset: automate the calls it is sure about and send the rest to a person.</p>
+    <p class="lede">Pick a real problem made of small judgment calls. Build a decision model for it that runs on your own hardware and gives honest probabilities. Prove it on data it has never seen, then put it to work: automate the calls it is sure about and send the rest to a person.</p>
     <ul class="facts">
       <li><b>13–14 Nov 2026</b> · Home of Innovation, Vienna</li>
       <li>Teams of <b>2–4</b></li>
-      <li>Code freeze <b>Sat 14:00</b> (TBC)</li>
-      <li>Your engine serves <b>port 8009</b></li>
-      <li>Graded with the <b>network off</b></li>
+      <li>Code freeze <b>Sat 15:00</b> sharp</li>
+      <li><b>Your problem</b>, your data</li>
+      <li>Wi-Fi off live <b>earns points</b></li>
     </ul>
   </header>
 
@@ -205,22 +213,36 @@ footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--li
 
   <section>
     <div class="head">
-      <h2>Five levels</h2>
-      <p class="muted">Each level is a demo on its own. Go as far as you can.</p>
+      <h2>Six steps</h2>
+      <p class="muted">Each step is a demo on its own. Go as far as you can.</p>
     </div>
     <ol class="levels">
-      <li><b>Serve it</b><span>A local engine on the decision API that passes the starter repo's evaluation runner.</span></li>
-      <li><b>Make it honest</b><span>Calibrate: when it says 90%, it should be right 9 times in 10. Measure Brier and calibration error, then fix them (temperature scaling is a good start).</span></li>
-      <li><b>Make it fast</b><span>Several questions per request, fast at p95. Read the input once and share it across questions; cache, batch, quantise.</span></li>
-      <li><b>Make it yours</b><span>Fine-tune or distil for data work, without losing the task types you have never seen.</span></li>
-      <li><b>Put it to work</b><span>A tool on the messy product catalogue: automate above a threshold, send the rest to a review queue, report the share automated at 5% errors.</span></li>
+      <li><b>Pick a problem</b><span>Judgment calls someone makes often, today by hand, with rules or with a big hosted model. Say who has it, what it costs them and why it should run locally.</span></li>
+      <li><b>Build the engine</b><span>A model that answers with probabilities on your machine: Kev, a small open model through the bridge, or a classic classifier. On the decision API, the kit's runner scores it for you.</span></li>
+      <li><b>Prove it</b><span>Hold out test data you never train, prompt or tune on. Put a simple baseline next to your model. Show your confidence is honest: when it says 90%, it is right 9 times in 10.</span></li>
+      <li><b>Make it yours</b><span>Fine-tune, distil a bigger teacher into a small student, train a new head, or label your own data. Show what each change gained.</span></li>
+      <li><b>Make it fast and cheap</b><span>Measure latency and cost per million decisions next to a hosted model. Run it with Wi-Fi off.</span></li>
+      <li><b>Put it to work</b><span>A tool for the people with the problem: automate above a threshold, send the rest to a review queue, report the share automated within your error budget.</span></li>
     </ol>
   </section>
 
   <section>
     <div class="head">
-      <h2>Practice data</h2>
-      <p class="muted">The repo generates a dev suite of five data-work families: 1,000 requests and 1,400 questions. Change the seed for unlimited training data.</p>
+      <h2>Pick a problem</h2>
+      <p class="muted">Three ways in. Whichever you take, hold out a test set before you start tuning.</p>
+    </div>
+    <div class="ways">
+      <div class="way"><h3>Your own</h3><span class="muted">Routing, policy checks, deduplication, triage: calls someone makes thousands of times. Your data, or any public data you're allowed to use.</span></div>
+      <div class="way"><h3>Dataset Factory</h3><span class="muted"><a href="https://earino.github.io/dataset-factory-site/">Ready-made yes/no tasks</a> from public data, with time-ordered splits and baselines to beat. Check each licence; link the data, don't commit it.</span></div>
+      <div class="way"><h3>Our starter problem</h3><span class="muted">Five data-work task families, a messy catalogue, a scorer and baselines, all in this kit. Below.</span></div>
+    </div>
+    <p class="note"><b>Is it a good problem?</b> Airbnb's four tests for when a small tuned model pays off: the volume is high, the latency is tight, you need a threshold rather than a verdict, and you have labelled data. Their 2B model matched frontier models on one policy check at a median 35 ms and about 1% of the cost (<a href="https://airbnb.tech/ai-ml/frontier-quality-at-1-of-the-cost-a-production-benchmark-of-llm-classifiers/">the benchmark</a>).</p>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2>The starter problem (optional)</h2>
+      <p class="muted">The kit generates a dev suite of five data-work families: 1,000 requests and 1,400 questions. Change the seed for unlimited training data.</p>
     </div>
     <div class="scroll">
       <table class="fam">
@@ -233,12 +255,12 @@ footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--li
         </tbody>
       </table>
     </div>
-    <p class="note"><b>The grading suite is not this file.</b> It has fresh data for these five families plus task families that are not in the repo. An engine that only knows these five won't do well.</p>
+    <p class="note"><b>Keep one seed you never train or tune on</b> as your test set, for example <code>--seed 777</code>. Your own problem works with the same runner: see “Score your own problem” in the README.</p>
   </section>
 
   <section>
     <div class="head">
-      <h2>The number that matters: automation rate</h2>
+      <h2>How many decisions can you automate?</h2>
       <p class="muted">Sort every decision by confidence. Automate from the top down while errors stay at or below 5%. The share you get through is your automation rate.</p>
     </div>
     <div class="auto">
@@ -253,30 +275,48 @@ footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--li
 
   <section>
     <div class="head">
-      <h2>How you're scored</h2>
-      <p class="muted">Out of 100. A to C are measured automatically on the hidden suite, on the reference machine, with the network off.</p>
+      <h2>How you're judged</h2>
+      <p class="muted">The track jury scores every team out of 100 during its demo slot. No hidden test suite: you bring the evidence, the jury checks it live and in your <code>REPORT.md</code> scorecard.</p>
     </div>
-    <div class="points" aria-hidden="true">
-      <div class="p-a">A 25</div><div class="p-b">B 15</div><div class="p-c">C 15</div><div class="p-d">D 25</div><div class="p-e">E 20</div>
+    <div>
+      <h3>Gates: fail one and you can't win the track</h3>
+      <ul class="gates">
+        <li>The standard submission, plus a <code>REPORT.md</code> that starts with the scorecard from <code>docs/REPORT_TEMPLATE.md</code></li>
+        <li>Every licence and terms of service respected: models, data, APIs</li>
+        <li>No made-up results: every number comes from a command in your repo</li>
+      </ul>
     </div>
-    <div class="split"><span>Measured by the runner · 55</span><span>Jury · 45</span></div>
+    <div class="points" role="img" aria-label="Points: A 20, B 30, C 20, D 20, E 10">
+      <div class="p-a">A 20</div><div class="p-b">B 30</div><div class="p-c">C 20</div><div class="p-d">D 20</div><div class="p-e">E 10</div>
+    </div>
     <div class="scroll">
       <table class="cats">
+        <thead><tr><th>Category</th><th>Pts</th><th>Top band (70–100%) looks like</th></tr></thead>
         <tbody>
-          <tr><td>A. Automation rate</td><td>25</td><td>Share of hidden-suite decisions automated at ≤5% errors, relative to the best team</td></tr>
-          <tr><td>B. Accuracy &amp; calibration</td><td>15</td><td>Accuracy (10) and Brier score (5), relative to the best team</td></tr>
-          <tr><td>C. Speed</td><td>15</td><td>p95 latency per request on the reference machine (tiers TBC)</td></tr>
-          <tr><td>D. Put it to work</td><td>25</td><td>Your data tool, its review queue and the live demo</td></tr>
-          <tr><td>E. Engineering</td><td>20</td><td>Starts from the README on a clean machine with the network off; tests; an honest REPORT.md</td></tr>
+          <tr><td>A. A problem worth solving</td><td>20</td><td>Who decides today, how often and at what cost; why local; data source and licence</td></tr>
+          <tr><td>B. Evidence it works</td><td>30</td><td>Held-out numbers next to a simple baseline, a threshold chosen from data, calibration shown, a big-model reference, and where it fails</td></tr>
+          <tr><td>C. Local, fast, cheap</td><td>20</td><td>Shown live with Wi-Fi off; latency and cost per million decisions next to a hosted model. A hosted model at decision time stays in the low band</td></tr>
+          <tr><td>D. Put it to work</td><td>20</td><td>Someone in that job would use it tomorrow; shows what it automated and what it sent to a person</td></tr>
+          <tr><td>E. Make it yours</td><td>10</td><td>An original idea with a measured gain: fine-tune, distillation, a new head, your own labels</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="small muted">Hard fails: calling a hosted model API at inference time, or training on or looking up the hidden suite. If your engine doesn't start from the README on the reference machine, A–C score 0.</p>
+    <p class="small muted">Bands: low is 0–30% of a category's points, mid 30–70%, high 70–100%. Tie-breakers: B, then C. The full band table is in <code>CASE.md</code>.</p>
+    <div>
+      <h3>Your 5-minute demo, in this order</h3>
+      <ol class="demo">
+        <li><span><b>The problem</b> (~45 s): who makes these calls, how often, what it costs, why local.</span></li>
+        <li><span><b>Live</b> (~2 min): your tool on real inputs. What it decided alone, what it sent to a person, and why. Turn Wi-Fi off on screen first.</span></li>
+        <li><span><b>The evidence</b> (~1.5 min): held-out numbers next to your baseline, your threshold, how honest your confidence is.</span></li>
+        <li><span><b>What you built</b> (~45 s): what you trained, tuned or invented, what it gained, your limits.</span></li>
+      </ol>
+    </div>
+    <p class="small muted">Then 3 minutes of questions. Your 3-minute video follows the same order; the jury watches it if the live demo breaks.</p>
   </section>
 
   <section>
     <div class="head">
-      <h2>Baseline to beat</h2>
+      <h2>Starter problem: baseline to beat</h2>
       <p class="muted">Our dry run on 12 Nov, out of the box, no tuning, on the dev suite.</p>
     </div>
     <div class="engines">
@@ -300,7 +340,7 @@ footer { font-size: 0.82rem; color: var(--muted); border-top: 1px solid var(--li
 
   <section>
     <div class="head">
-      <h2>Quick start</h2>
+      <h2>Quick start (starter problem)</h2>
       <p class="muted">Needs <a href="https://docs.astral.sh/uv/">uv</a>. The kit itself is plain Python 3.11+ with no dependencies.</p>
     </div>
     <div class="cmds">
@@ -334,16 +374,17 @@ uv run python -m thinkfast.run_eval --suite data/dev.jsonl               # full 
     <div class="head" style="gap:10px">
       <h2>House rules</h2>
       <ul>
-        <li>Local only at grading: no hosted model APIs at inference time. Cloud is fine for training.</li>
-        <li>Open weights only; respect every licence, including the terms of any model you generate training data with.</li>
-        <li>Don't train on or look up the hidden suite.</li>
+        <li>Any model, any data you're allowed to use. Cloud is fine for training and labelling. Hosted models at decision time are allowed but score low on C.</li>
+        <li>Respect every licence and terms of service, including those of any model you generate training data with. Data you may not redistribute is linked, not committed.</li>
+        <li>Test on data you never trained, prompted or tuned on.</li>
       </ul>
     </div>
     <div class="head" style="gap:10px">
       <h2>Submit</h2>
       <ul>
-        <li>One documented command that starts your engine on port 8009 from a clean checkout. Weights come from a separate setup step.</li>
-        <li>A <code>REPORT.md</code>: your dev-suite numbers from the runner, the model and hardware you measured on, and what you'd do next.</li>
+        <li>The standard submission: public MIT repo in the proximata organisation, README, 3-minute video, written submission.</li>
+        <li>A <code>REPORT.md</code> that starts with the scorecard from <code>docs/REPORT_TEMPLATE.md</code>.</li>
+        <li>One command that reproduces your held-out numbers.</li>
       </ul>
     </div>
   </section>
@@ -351,17 +392,20 @@ uv run python -m thinkfast.run_eval --suite data/dev.jsonl               # full 
   <section>
     <div class="head"><h2>Reading the numbers</h2></div>
     <dl class="terms">
+      <dt>Held-out test set</dt><dd>Data you never trained, prompted or tuned on. Your numbers only count here.</dd>
+      <dt>Baseline</dt><dd>The simplest thing that could work: the most common answer, a few rules, a logistic regression.</dd>
       <dt>Accuracy</dt><dd>Share of questions where your most likely answer is right.</dd>
       <dt>Brier score</dt><dd>How far your probabilities are from the truth. 0 is perfect, lower is better.</dd>
       <dt>Calibration error</dt><dd>Gap between how sure you say you are and how often you're right.</dd>
-      <dt>Automation rate</dt><dd>Share of decisions you can take alone with at most 5% errors. The headline number.</dd>
+      <dt>Automation rate</dt><dd>Share of decisions you can take alone with at most 5% errors. The runner's headline number.</dd>
+      <dt>F1, AUC</dt><dd>Common yes/no metrics: F1 balances missed and false alarms at one threshold; AUC ranks across all thresholds.</dd>
       <dt>p95 latency</dt><dd>95% of requests finish faster than this.</dd>
     </dl>
   </section>
 
   <footer>
     <span>Full brief: <code>CASE.md</code> · API: <code>docs/decision-api.md</code> · Starter kit: <a href="https://github.com/proximata/hackathon-26-think-fast">github.com/proximata/hackathon-26-think-fast</a></span>
-    <span>Open models and code: <a href="https://github.com/jaredpalmer/kev">Kev</a>, <a href="https://github.com/TheoLeeCJ/SemIf-OpenJev">SemIf</a>, <a href="https://github.com/githubnext/localjev">LocalJev</a>, <a href="https://github.com/meshapplied/goethe">Goethe</a> (needs an Ampere or newer NVIDIA GPU). Items marked TBC are confirmed at kick-off.</span>
+    <span>Open models and code: <a href="https://github.com/jaredpalmer/kev">Kev</a>, <a href="https://github.com/TheoLeeCJ/SemIf-OpenJev">SemIf</a>, <a href="https://github.com/githubnext/localjev">LocalJev</a>, <a href="https://github.com/meshapplied/goethe">Goethe</a> (needs an Ampere or newer NVIDIA GPU). Problems: <a href="https://earino.github.io/dataset-factory-site/">Dataset Factory</a>. Reading: <a href="https://airbnb.tech/ai-ml/frontier-quality-at-1-of-the-cost-a-production-benchmark-of-llm-classifiers/">Airbnb's LLM classifier benchmark</a>.</span>
   </footer>
 </div>
 

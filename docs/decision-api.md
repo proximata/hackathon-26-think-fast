@@ -1,7 +1,8 @@
 # Decision API contract
 
-Your engine must serve this one endpoint. The evaluation runner
-(`thinkfast/run_eval.py`) calls nothing else.
+Serve this one endpoint and the evaluation runner (`thinkfast/run_eval.py`)
+can score your engine, on the starter problem or on your own. The runner calls
+nothing else.
 
 The wire format is the one the open decision-model projects already speak.
 [Kev](https://github.com/jaredpalmer/kev) documents it in full in its README and
@@ -64,7 +65,7 @@ Any error, timeout (30 s by default) or missing answer counts as a uniform
 guess for the questions involved. The engine has to keep serving after a bad
 request.
 
-## Your probabilities are graded
+## The runner scores your probabilities
 
 The automation rate, Brier score and calibration error all read your
 probabilities, not just the top answer. An engine that always says 0.99 gets

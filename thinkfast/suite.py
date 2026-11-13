@@ -3,8 +3,7 @@
 Each item is one request to the decision API plus the labels for its
 questions. All data is synthetic product, order and support data (fictional
 brands, no people), so you can generate as much training data as you like with
-other seeds. The hidden suite used for grading draws these families with a
-secret seed and adds task families that are not in this file.
+other seeds. Keep one seed you never train or tune on as your test set.
 
     uv run python -m thinkfast.suite --out data/dev.jsonl
 """
