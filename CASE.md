@@ -114,14 +114,14 @@ The track jury scores every team out of 100 during its demo slot and picks the h
 
 **Score.** Each category has three bands: low is 0–30% of its points, mid 30–70%, high 70–100%.
 
-| Category | Points | Low | Mid | High |
-|---|---|---|---|---|
-| A. A problem worth solving | 20 | A toy task, or nobody named who has it | A real workflow and user with real data, but volume, cost or why local left vague | Who decides today, how often and at what cost; why it should run locally; data source and licence |
-| B. Evidence it works | 30 | A demo only, or numbers on data the model saw | Held-out numbers next to a simple baseline | Also a threshold chosen from data, calibration shown, a big-model reference, and where it fails |
-| C. Local, fast, cheap | 20 | A hosted model at decision time, or nothing measured | Runs on your own hardware; latency and cost per million decisions measured | Shown live with Wi-Fi off, compared with a hosted model doing the same job |
-| D. Put it to work | 20 | A model only, no workflow | A working tool with a threshold and a review queue | Someone in that job would use it tomorrow; shows what it automated and what it sent to a person |
-| E. Make it yours | 10 | An off-the-shelf model with a prompt | One solid change, measured: a fine-tune, distillation, a new head or your own labels | An original idea with a measured gain |
-| Total | 100 | | | |
+| Category | Points | How it's scored |
+|---|---|---|
+| A. A problem worth solving | 20 | Who makes these calls today, how often and at what cost, and why it should run locally, with the data's source and licence. A toy task, or nobody named who has it, scores low. |
+| B. Evidence it works | 30 | Numbers on a held-out test set, next to a simple baseline. The top band also needs a threshold chosen from data, calibration shown, a big-model reference, and an honest account of where it fails. A demo only, or numbers on data the model saw, scores low. |
+| C. Local, fast, cheap | 20 | Runs on your own hardware, with latency and cost per million decisions measured. The top band needs it live with Wi-Fi off, compared with a hosted model doing the same job. A hosted model at decision time stays in the low band. |
+| D. Put it to work | 20 | A working tool with a threshold and a review queue. The top band needs a tool someone in that job would use tomorrow, showing what it automated and what it sent to a person. A model with no workflow scores low. |
+| E. Make it yours | 10 | A fine-tune, distillation, new head, your own labels or an original idea, with a measured gain. An off-the-shelf model with a prompt scores low. |
+| Total | 100 | |
 
 Using the starter problem is fine. For A, tell us who would use your tool and why it should run locally.
 
