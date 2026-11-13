@@ -18,8 +18,8 @@ Every number must come from a command in your repo. "Not measured" is a fine ans
 | Metric, and why it fits the problem | |
 | Simple baseline on the test set | |
 | Your model on the test set | |
-| Is the gap real? Bootstrap 95% range on the difference to the baseline | |
-| Weakest slice (rare labels, a segment): baseline vs your model there | |
+| Optional: bootstrap 95% range on the gain over the baseline | |
+| Optional: weakest slice (rarest answers, a segment): baseline vs yours | |
 | Big-model reference on the test set (optional) | |
 | Threshold: share decided automatically, and the error rate there | |
 | Calibration: Brier score or calibration error, before → after | |
@@ -31,7 +31,7 @@ Every number must come from a command in your repo. "Not measured" is a fine ans
 | Command that reproduces the test-set numbers | |
 | Demo video | |
 | Known limits | |
-| What you'd ship, and when you'd still pick the big model | |
+| Optional: what you'd ship, and when you'd still pick the big model | |
 
 ## Is it a good problem?
 

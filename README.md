@@ -13,6 +13,7 @@ You choose the problem. This kit is optional help: a starter problem with a test
 | [CASE.md](CASE.md) | The case brief: challenge, steps, rules, judging |
 | [docs/REPORT_TEMPLATE.md](docs/REPORT_TEMPLATE.md) | Copy it to `REPORT.md` in your repo: the scorecard the jury reads during your demo |
 | [docs/decision-api.md](docs/decision-api.md) | The one endpoint your engine must serve |
+| [docs/further-resources.md](docs/further-resources.md) | Optional extras: a free deep-learning course on calibration, LoRA, quantization and distillation, and what carries over to a decision engine |
 | [docs/participant-guide.html](docs/participant-guide.html) | One-page visual guide: the challenge, how you're judged, the starter problem and its baseline numbers. Download it and open it in a browser |
 | `thinkfast/suite.py` | Starter problem: generates the dev suite (five data-work task families), or unlimited training and test data with other seeds |
 | `thinkfast/run_eval.py` | Runs a suite against your engine: accuracy, Brier score, calibration error, automation rate at a 5% error budget, latency. Works on your own problem too |
@@ -79,14 +80,6 @@ If your engine serves the decision API, the runner scores any problem written as
 ```
 
 Labels are the option name for `choice`, `true` or `false` for `noul`, and the level index (0, 1, 2, …) for `score`. The full question format is in [docs/decision-api.md](docs/decision-api.md).
-
-## Measured lessons worth knowing
-
-From the [Applied Deep Learning](https://earino.github.io/applied-deep-learning/) course (E. Ariño de la Rubia, CEU), measured on a 113-label complaint-routing task:
-
-- **Try temperature scaling before distillation.** One fitted number beat an 80-minute distillation run on calibration error ([blog](https://earino.github.io/applied-deep-learning/site/blog/12_temperature_scaling_beats_distillation.html)).
-- **Measure before you quantize.** bitsandbytes int8 ran about 2.5× slower than fp16 on sub-7B models on a T4 GPU, and used more memory ([blog](https://earino.github.io/applied-deep-learning/site/blog/11_int8_is_slower.html)).
-- **Data beats scale on a long tail.** With the same fine-tuning setup, 1.5B, 3B and 8B models scored 0.250, 0.270 and 0.271 macro F1 ([blog](https://earino.github.io/applied-deep-learning/site/blog/08_cant_scale_out_of_data_problem.html)).
 
 ## How you're judged
 
