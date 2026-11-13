@@ -1,4 +1,4 @@
-# REPORT: <project name>
+# REPORT: [project name]
 
 <!--
 Copy this file to REPORT.md at the root of your repo and fill it in.
